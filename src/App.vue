@@ -1,29 +1,25 @@
 <template>
   <div class="container">
-    <p>{{ $store.state.moduleA.username }}</p>
-    <p>{{ $store.getters['moduleA/newName'] }}</p>
-    <p>{{ $store.state.moduleB.username }}</p>
-    <p>{{ $store.getters['moduleB/newNames'] }}</p>
-    <button @click="mutationsFn">mutationsFn</button>
-    <button @click="actionsFn">actionsFn</button>
+    App
+    {{ $store.state.user.profile }}
+    <button
+      @click="
+        $store.commit('user/setUser', {
+          id: '2',
+          avater: 'pic',
+          account: '23$',
+          mobile: '1222',
+          token: 'as'
+        })
+      "
+    >
+      设置用户信息
+    </button>
   </div>
 </template>
 
 <script>
-import { useStore } from 'vuex'
-export default {
-  name: 'App',
-  setup() {
-    const store = useStore()
-    function mutationsFn() {
-      store.commit('moduleB/updateName')
-    }
-    function actionsFn() {
-      store.dispatch('moduleB/initList')
-    }
-    return { mutationsFn, actionsFn }
-  }
-}
+export default {}
 </script>
 
 <style></style>
