@@ -1,30 +1,29 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="container">
+    <p>{{ $store.state.moduleA.username }}</p>
+    <p>{{ $store.getters['moduleA/newName'] }}</p>
+    <p>{{ $store.state.moduleB.username }}</p>
+    <p>{{ $store.getters['moduleB/newNames'] }}</p>
+    <button @click="mutationsFn">mutationsFn</button>
+    <button @click="actionsFn">actionsFn</button>
+  </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import { useStore } from 'vuex'
+export default {
+  name: 'App',
+  setup() {
+    const store = useStore()
+    function mutationsFn() {
+      store.commit('moduleB/updateName')
     }
+    function actionsFn() {
+      store.dispatch('moduleB/initList')
+    }
+    return { mutationsFn, actionsFn }
   }
 }
-</style>
+</script>
+
+<style></style>
